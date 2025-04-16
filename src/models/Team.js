@@ -33,4 +33,11 @@ const teamSchema = new mongoose.Schema({
   },
 });
 
+teamSchema.pre("save", function (next) {
+  this.invitations = this.invitations.filter(
+    (invitation) => invitation.expiresAt > Date.now()
+  );
+  next();
+})
+
 export default mongoose.model("Team", teamSchema);

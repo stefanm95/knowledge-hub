@@ -3,6 +3,38 @@ import crypto from "crypto";
 import Team from "../models/Team.js";
 import User from "../models/User.js";
 
+export const cleanupExpiredInvitations = async () => {
+  try {
+    const teams = await Team.find();
+    let totalRemoved = 0; // Track the total number of removed invitations
+
+    for (const team of teams) {
+      const initialCount = team.invitations.length;
+      team.invitations = team.invitations.filter(
+        (invitation) => invitation.expiresAt > Date.now()
+      );
+      const removedCount = initialCount - team.invitations.length;
+      totalRemoved += removedCount;
+
+      if (removedCount > 0) {
+        console.log(
+          `Removed ${removedCount} expired invitations from team: ${team.name}`
+        );
+      }
+
+      await team.save();
+    }
+
+    if (totalRemoved === 0) {
+      console.log("No expired invitations found.");
+    } else {
+      console.log("Expired invitations cleaned up successfully.");
+    }
+  } catch (error) {
+    console.error("Error cleaning up expired invitations:", error);
+  }
+};
+
 export const createTeam = async (req, res) => {
   const { name, description } = req.body;
   const userId = req.user._id;
@@ -96,6 +128,16 @@ export const acceptInvitation = async (req, res) => {
       return res
         .status(404)
         .json({ message: "Invalid or expired invitation token" });
+    }
+
+    // Check if the user is already a member of the team
+    const isAlreadyMember = team.members.some(
+      (member) => member.user.toString() === userId.toString()
+    );
+    if (isAlreadyMember) {
+      return res
+        .status(400)
+        .json({ message: "User is already a member of this team" });
     }
 
     const invitation = team.invitations.find((inv) => inv.token === token);
