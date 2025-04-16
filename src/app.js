@@ -3,6 +3,8 @@ import cron from "node-cron";
 import { cleanupExpiredInvitations } from "./controllers/teamController.js"; // Adjust the path as necessary
 import authRoutes from "./routes/authRoutes.js"; // Adjust the path as necessary
 import teamRoutes from "./routes/teamRoutes.js"; // Adjust the path as necessary
+import folderRoutes from "./routes/folderRoutes.js"; // Adjust the path as necessary
+import documentRoutes from "./routes/documentRoutes.js"; // Adjust the path as necessary
 import bodyParser from "body-parser";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -23,6 +25,8 @@ app.use(cors());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/team", teamRoutes);
+app.use("/api/folders", folderRoutes); // Ensure folderRoutes is imported correctly
+app.use("/api/documents", documentRoutes); // Ensure fileRoutes is imported correctly
 
 // Start the server
 app.listen(PORT, () => {
