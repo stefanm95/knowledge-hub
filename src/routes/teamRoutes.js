@@ -1,6 +1,11 @@
 import express from "express";
 import authMiddleware from "../middlewares/authMiddleware.js";
-import { createTeam, inviteUser, acceptInvitation, getTeamMembers } from "../controllers/teamController.js";
+import {
+  createTeam,
+  inviteUser,
+  acceptInvitation,
+  getTeamMembers,
+} from "../controllers/teamController.js";
 
 const router = express.Router();
 
