@@ -18,6 +18,16 @@ const folderSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
+});
+
+folderSchema.virtual("documents", {
+    ref: "Document",  //model 
+    localField: "_id", //field in the folder model
+    foreignField: "folder", //field in the document
 })
+
+//virtual field included in JSON responses
+folderSchema.set("toObject", { virtuals: true });
+folderSchema.set("toJSON", { virtuals: true });
 
 export default mongoose.model("Folder", folderSchema);

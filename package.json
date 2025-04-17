@@ -9,17 +9,24 @@
     "dev": "nodemon src/app.js"
   },
   "dependencies": {
+    "@huggingface/inference": "^3.8.0",
     "bcryptjs": "^3.0.2",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
+    "exceljs": "^4.4.0",
     "express": "^4.17.1",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
+    "mammoth": "^1.9.0",
     "mongoose": "^8.13.2",
     "multer": "^1.4.5-lts.2",
     "node-cron": "^3.0.3",
     "nodemailer": "^6.10.0",
-    "team-knowledge-hub-backend": "file:"
+    "pdf-parse": "^1.1.1",
+    "pdf-poppler": "^0.2.1",
+    "team-knowledge-hub-backend": "file:",
+    "tesseract.js": "^6.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
