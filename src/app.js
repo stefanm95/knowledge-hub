@@ -17,10 +17,14 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+
 // Middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
+//Swagger UI setup
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Routes
 app.use("/api/auth", authRoutes);

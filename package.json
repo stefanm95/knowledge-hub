@@ -25,6 +25,8 @@
     "nodemailer": "^6.10.0",
     "pdf-parse": "^1.1.1",
     "pdf-poppler": "^0.2.1",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
     "team-knowledge-hub-backend": "file:",
     "tesseract.js": "^6.0.1"
   },
